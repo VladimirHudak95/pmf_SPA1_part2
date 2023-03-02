@@ -2,7 +2,7 @@ package arrays;
 
 public class ArraysOperations {
 
-	private static int[] array = new int[10];
+	private static int[] array = new int[30];
 	
 	public ArraysOperations() {
 	}
@@ -15,7 +15,7 @@ public class ArraysOperations {
 		if(index < 0 || index > array.length - 1) {
 			throw new ArrayIndexOutOfBoundsException(); 
 		}
-		array[index] = element;
+		array[index] = element % 10;
 	}
 	
 	public static void addAtIndexAndShift(int index, int element) {
