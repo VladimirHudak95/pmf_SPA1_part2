@@ -9,49 +9,19 @@ public class ListTest {
 			list.add(i);
 		}
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
+		list.print();
 		
-		list.remove(47);
+		MyLinkedList<Integer> first10ElementsList = list.splitFirstNElementsIntoNewList(33);
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-		
-		MyLinkedList<Integer> oneElementList = new MyLinkedList<>();
-		
-		oneElementList.add(123);
-		
-		System.out.println(oneElementList.getFirst() + " and " + oneElementList.getLast());
-		
-		oneElementList.remove(0);
-		
-		System.out.println(oneElementList.getFirst() + " and " + oneElementList.getLast());
 		System.out.println();
 		
-		System.out.println(list.getFirst() + " and " + list.getLast());
-		System.out.println(list.getFirst() + " and " + list.getLast());
-		
-		list.reverse();		
-		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-		
-		System.out.println(list.getFirst() + " and " + list.getLast());
-		
-		MyLinkedList<Integer> twoElementList = new MyLinkedList<>();
-		twoElementList.add(5);
-		twoElementList.add(7);
-		
-		System.out.println(twoElementList.getFirst() + " and " + twoElementList.getLast());
-		
-		
-		twoElementList.reverse();
-		
-		System.out.println(twoElementList.getFirst() + " and " + twoElementList.getLast());
-				
+		list.print();
+		System.out.println();
+		System.out.println("first element of old list is " + list.getFirst() + " and last element is " + list.getLast());
+		System.out.println();
+		first10ElementsList.print();
+		System.out.println();
+		System.out.println("first element of new list is " + first10ElementsList.getFirst() + " and last element is " + first10ElementsList.getLast());
 	}
 
 }

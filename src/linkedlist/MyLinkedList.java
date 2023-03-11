@@ -1,5 +1,7 @@
 package linkedlist;
 
+import java.nio.file.spi.FileSystemProvider;
+
 public class MyLinkedList<E> implements MyList<E> {
 
 	private int size;
@@ -31,6 +33,18 @@ public class MyLinkedList<E> implements MyList<E> {
 	@Override
 	public boolean isEmpty() {
 		return size == 0;
+	}
+	
+	public void print() {
+		if (first == null) {
+			System.out.println("Empty list!");
+			return;
+		}
+		Node<E> curr = first;
+		while (curr != null) {
+			System.out.println(curr.info);
+			curr = curr.next;
+		}
 	}
 
 	@Override
@@ -274,6 +288,43 @@ public class MyLinkedList<E> implements MyList<E> {
 		curr.next = old;
 		first = curr;
 	}
+	
+	public MyLinkedList<E> splitFirstNElementsIntoNewList(int n) {
+		if (isPositionOutOfRange(n)) {
+			throw new IndexOutOfBoundsException();
+		}
+		MyLinkedList<E> newList = new MyLinkedList<>();
+		if (n == 0) {
+			return newList;
+		}
+		if (n == size) {
+			newList.first = first;
+			newList.last = last;
+			newList.size = size;
+			first = null;
+			last = null;
+			size = 0;
+			return newList;
+		}
+		
+		newList.first = first;
+		newList.size++;
+		size--;
+		
+		Node<E> curr = newList.first;
+		while(newList.size < n) {
+			curr = curr.next;
+			newList.size++;
+			size--;
+		}
+		newList.last = curr;
+		this.first = curr.next;
+		curr.next = null;
+		return newList;
+	}
+	
+	
+	
 	
 	private boolean isIndexOutOfRange(int index) {
 		return index < 0 || index >= size;
