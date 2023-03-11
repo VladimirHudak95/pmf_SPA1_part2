@@ -1,7 +1,5 @@
 package linkedlist;
 
-import java.nio.file.spi.FileSystemProvider;
-
 public class MyLinkedList<E> implements MyList<E> {
 
 	private int size;
@@ -289,7 +287,7 @@ public class MyLinkedList<E> implements MyList<E> {
 		first = curr;
 	}
 	
-	public MyLinkedList<E> splitFirstNElementsIntoNewList(int n) {
+	public MyLinkedList<E> splitFirstN(int n) {
 		if (isPositionOutOfRange(n)) {
 			throw new IndexOutOfBoundsException();
 		}

@@ -12,7 +12,7 @@ public class ListTest {
 		list.print();
 		System.out.println("Size of list is " + list.size());
 		
-		MyLinkedList<Integer> first10ElementsList = list.splitFirstNElementsIntoNewList(50);
+		MyLinkedList<Integer> first10ElementsList = list.splitFirstN(50);
 		
 		System.out.println();
 		
