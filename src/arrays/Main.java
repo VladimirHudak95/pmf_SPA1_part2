@@ -39,10 +39,6 @@ public class Main {
 		System.out.println();
 		System.out.println(((programEnd - programStart) / 1000000) +  "." + ((programEnd - programStart) % 1000000) + " milliseconds");
 		
-		
-		
-		
-		
 	}
 
 }

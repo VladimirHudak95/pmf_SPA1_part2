@@ -49,13 +49,28 @@ public class MyLinkedList<E> implements MyList<E> {
 	}
 
 	@Override
+	public boolean addBehindLast(E e) {
+		final Node<E> n = new Node<E>(e, null);
+		if (first == null) {
+			first = n;
+			last = n;
+			size++;
+		} else {
+			last.next = n;
+			last = n;
+			size++;
+		}
+		return true;
+	}
+
+	@Override
 	public boolean remove(E e) {
 
 		Node<E> curr = first;
 		Node<E> prev = null;
-		
+
 		if (first != null && last != null && (first.info.equals(e) || last.info.equals(e))) {
-			if(first.info.equals(e) && last.info.equals(e)) {
+			if (first.info.equals(e) && last.info.equals(e)) {
 				first = null;
 				last = null;
 				size--;
@@ -65,7 +80,7 @@ public class MyLinkedList<E> implements MyList<E> {
 				size--;
 				return true;
 			} else {
-				while(curr.next != last) {
+				while (curr.next != last) {
 					curr = curr.next;
 				}
 				last = curr;
@@ -74,7 +89,7 @@ public class MyLinkedList<E> implements MyList<E> {
 				return true;
 			}
 		}
-		
+
 		while (curr != null) {
 			if (curr.info.equals(e)) {
 				prev.next = curr.next;
@@ -85,37 +100,37 @@ public class MyLinkedList<E> implements MyList<E> {
 			prev = curr;
 			curr = curr.next;
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public boolean contains(E e) {
-		
-		if(isEmpty()) {
+
+		if (isEmpty()) {
 			return false;
 		}
-		
+
 		Node<E> curr = first;
-		
-		while(curr != null) {
-			if(curr.info.equals(e)) {
+
+		while (curr != null) {
+			if (curr.info.equals(e)) {
 				return true;
 			}
 			curr = curr.next;
 		}
-		
+
 		return false;
 	}
 
 	@Override
 	public void clear() {
-		if(isEmpty()) {
+		if (isEmpty()) {
 			return;
 		}
 		Node<E> prev = first;
 		Node<E> curr = first.next;
-		while(curr != null) {
+		while (curr != null) {
 			prev.info = null;
 			prev.next = null;
 			prev = curr;
@@ -125,43 +140,128 @@ public class MyLinkedList<E> implements MyList<E> {
 		prev.info = null;
 		prev.next = null;
 		size--;
-		
+
 		first = null;
 		last = null;
 	}
 
 	@Override
+	public E getFirst() {
+		if (!isEmpty()) {
+			return first.info;
+		}
+		return null;
+	}
+
+	@Override
+	public E getLast() {
+		if (!isEmpty()) {
+			return last.info;
+		}
+		return null;
+	}
+
+	@Override
 	public E get(int index) {
-		if (index < 0 || index >= size()) {
+		if (isIndexOutOfRange(index)) {
 			throw new IndexOutOfBoundsException();
 		}
 		int count = 0;
 		Node<E> curr = first;
-		while(count != index) {
+		while (count != index) {
 			curr = curr.next;
 			count++;
 		}
-	
+
 		return curr.info;
+	}
+
+	private Node<E> getNode(int index) {
+
+		Node<E> node = first;
+		for (int i = 0; i < index; i++) {
+			node = node.next;
+		}
+		return node;
 	}
 
 	@Override
 	public E set(int index, E element) {
-		E oldValue = get(index);
-		
-		
-		
+		if (isIndexOutOfRange(index)) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		Node<E> node = getNode(index);
+		E oldValue = node.info;
+		node.info = element;
+
 		return oldValue;
 	}
 
 	@Override
 	public void add(int index, E element) {
-
+		if (isPositionOutOfRange(index)) {
+			throw new IndexOutOfBoundsException();
+		}
+		final Node<E> node = new Node<E>(element, null);
+		if (index == 0) {
+			node.next = first;
+			first = node;
+			size++;
+		} else if (index == size) {
+			last.next = node;
+			last = node;
+			size++;
+		} else {
+			Node<E> prev = first;
+			for (int i = 1; i < index; i++) {
+				prev = prev.next;
+			}
+			node.next = prev.next;
+			prev.next = node;
+			size++;
+		}
 	}
 
 	@Override
 	public E remove(int index) {
-		return null;
+		if (isIndexOutOfRange(index)) {
+			throw new IndexOutOfBoundsException();
+		}
+		if (size == 1) {
+			E info = first.info;
+			first = null;
+			last = null;
+			size--;
+			return info;
+		}
+		if (index == 0) {
+			final E info = first.info;
+			first = first.next;
+			size--;
+			return info;
+		} else if (index == size - 1) {
+			final E info = last.info;
+			Node<E> prev = getNode(index - 1);
+			last = prev;
+			last.next = null;
+			size--;
+			return info;
+		} else {
+			final Node<E> prev = getNode(index - 1);
+			final E info = prev.next.info;
+			prev.next = prev.next.next;
+			size--;
+			return info;
+		}
+	}
+	
+	private boolean isIndexOutOfRange(int index) {
+		return index < 0 || index >= size;
+	}
+	
+	private boolean isPositionOutOfRange(int position) {
+		return position < 0 || position > size;
 	}
 
 }

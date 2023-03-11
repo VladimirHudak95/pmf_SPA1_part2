@@ -21,7 +21,7 @@ public interface MyList<E> {
 	boolean isEmpty();
 
 	 /**
-     * Appends the specified element to the end of this list (optional
+     * Appends the specified element to the beginning of this list (optional
      * operation).
      *
      * <p>Lists that support this operation may place limitations on what
@@ -43,6 +43,30 @@ public interface MyList<E> {
      *         prevents it from being added to this list
      */
 	boolean add(E e);
+	
+	/**
+	 * Appends the specified element to the end of this list (optional
+	 * operation).
+	 *
+	 * <p>Lists that support this operation may place limitations on what
+	 * elements may be added to this list.  In particular, some
+	 * lists will refuse to add null elements, and others will impose
+	 * restrictions on the type of elements that may be added.  List
+	 * classes should clearly specify in their documentation any restrictions
+	 * on what elements may be added.
+	 *
+	 * @param e element to be appended to this list
+	 * @return {@code true} (as specified by {@link Collection#add})
+	 * @throws UnsupportedOperationException if the {@code add} operation
+	 *         is not supported by this list
+	 * @throws ClassCastException if the class of the specified element
+	 *         prevents it from being added to this list
+	 * @throws NullPointerException if the specified element is null and this
+	 *         list does not permit null elements
+	 * @throws IllegalArgumentException if some property of this element
+	 *         prevents it from being added to this list
+	 */
+	boolean addBehindLast(E e);
 
 	/**
      * Removes the first occurrence of the specified element from this list,
@@ -98,6 +122,20 @@ public interface MyList<E> {
      *         ({@code index < 0 || index >= size()})
      */
     E get(int index);
+    
+    /**
+     * Returns the first element of the list.
+     * 
+     * @return the first element of the list
+     */
+    E getFirst();
+   
+    /**
+     * Returns the last element of the list.
+     * 
+     * @return the last element of the list
+     */
+    E getLast();
     
     /**
      * Replaces the element at the specified position in this list with the
