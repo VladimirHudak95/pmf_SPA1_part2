@@ -28,11 +28,30 @@ public class ListTest {
 		oneElementList.remove(0);
 		
 		System.out.println(oneElementList.getFirst() + " and " + oneElementList.getLast());
+		System.out.println();
+		
+		System.out.println(list.getFirst() + " and " + list.getLast());
+		System.out.println(list.getFirst() + " and " + list.getLast());
+		
+		list.reverse();		
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		
+		System.out.println(list.getFirst() + " and " + list.getLast());
+		
+		MyLinkedList<Integer> twoElementList = new MyLinkedList<>();
+		twoElementList.add(5);
+		twoElementList.add(7);
+		
+		System.out.println(twoElementList.getFirst() + " and " + twoElementList.getLast());
 		
 		
+		twoElementList.reverse();
 		
-		
-
+		System.out.println(twoElementList.getFirst() + " and " + twoElementList.getLast());
+				
 	}
 
 }

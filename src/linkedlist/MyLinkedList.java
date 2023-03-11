@@ -256,6 +256,25 @@ public class MyLinkedList<E> implements MyList<E> {
 		}
 	}
 	
+	public void reverse() {
+		if (size == 0 || size == 1) {
+			return;
+		}
+		
+		Node<E> old = null;
+		Node<E> curr = first;
+		Node<E> next = first.next;
+		last = first;
+		while(curr.next != null) {
+			curr.next = old;
+			old = curr;
+			curr = next;
+			next = next.next;
+		}
+		curr.next = old;
+		first = curr;
+	}
+	
 	private boolean isIndexOutOfRange(int index) {
 		return index < 0 || index >= size;
 	}
