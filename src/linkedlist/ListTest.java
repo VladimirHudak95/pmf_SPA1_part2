@@ -5,26 +5,32 @@ public class ListTest {
 	public static void main(String[] args) {
 		
 		MyLinkedList<Integer> list = new MyLinkedList<>();
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < 5; i++) {
 			list.add(i);
 		}
 		
 		list.print();
 		System.out.println("Size of list is " + list.size());
+	
+		MyLinkedList<Integer> oddList = list.splitOddIndexes();
 		
-		MyLinkedList<Integer> first10ElementsList = list.splitFirstN(50);
-		
+		System.out.println();
+		System.out.println("First element of old list is " + list.getFirst() + " and last element is " + list.getLast());
+		System.out.println();
+		System.out.println("Size of list is " + list.size());
 		System.out.println();
 		
 		list.print();
-		System.out.println("Size of list is " + list.size());
+		
+		System.out.println();		
+		System.out.println("First element of new list is " + oddList.getFirst() + " and last element is " + oddList.getLast());
 		System.out.println();
-		System.out.println("first element of old list is " + list.getFirst() + " and last element is " + list.getLast());
+		System.out.println("Size of list is " + oddList.size());
 		System.out.println();
-		first10ElementsList.print();
-		System.out.println("Size of new list is " + first10ElementsList.size());
-		System.out.println();
-		System.out.println("first element of new list is " + first10ElementsList.getFirst() + " and last element is " + first10ElementsList.getLast());
+		
+		oddList.print();
+		
+		
 	}
 
 }

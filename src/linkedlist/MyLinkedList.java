@@ -321,8 +321,47 @@ public class MyLinkedList<E> implements MyList<E> {
 		return newList;
 	}
 	
+	public MyLinkedList<E> splitOddIndexes() {
+		MyLinkedList<E> oddList = new MyLinkedList<>();
+		if (first == null || first.next == null) {
+			return oddList;
+		}
+		Node<E> curr = first;
+		Node<E> oddCurr = first.next;
+		oddList.first = oddCurr;
 	
-	
+		if (size % 2 != 0) {
+			Node<E> oldOddCurr = null;
+			while (oddCurr != null) {
+				oldOddCurr = oddCurr;
+				curr.next = oddCurr.next;
+				size--;
+				oddList.size++;
+				curr = curr.next;
+				oddCurr.next = curr.next;
+				oddCurr = oddCurr.next;
+			}
+			oddList.last = oldOddCurr;
+		} else {
+			Node<E> oldCurr = null;
+			while (curr != null) {
+				oldCurr = curr;
+				curr.next = oddCurr.next;
+				size--;
+				oddList.size++;
+				curr = curr.next;
+				if (oddCurr.next != null) {
+					oddCurr.next = curr.next;
+					oddCurr = oddCurr.next;
+				}
+			}
+			oddList.last = last;
+			last = oldCurr;
+		}
+		
+		return oddList;
+		
+	}
 	
 	private boolean isIndexOutOfRange(int index) {
 		return index < 0 || index >= size;
