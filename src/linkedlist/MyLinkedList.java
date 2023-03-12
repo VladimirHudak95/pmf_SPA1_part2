@@ -11,6 +11,16 @@ public class MyLinkedList<E> implements MyList<E> {
 		this.first = null;
 		this.last = null;
 	}
+	
+	public MyLinkedList(E[] array) {
+		this();
+		this.addFromArray(array);
+	}
+	
+	public MyLinkedList(MyLinkedList<E> newList) {
+		this();
+		this.addFromList(newList);
+	}
 
 	private static class Node<E> {
 		private E info;
@@ -361,6 +371,31 @@ public class MyLinkedList<E> implements MyList<E> {
 		
 		return oddList;
 		
+	}
+	
+	public  Object[] toArray() {
+		Object[] array = new Object [size];
+		int i = 0;
+		Node<E> curr = first;
+		while(curr != null) {
+			array[i++] = curr.info;
+			curr = curr.next;
+		}
+		return array;
+	}
+	
+	public void addFromArray(E[] array) {
+		for(E e : array) {
+			addBehindLast(e);
+		}
+	}
+	
+	public void addFromList(MyLinkedList<E> newList) {
+		Node<E> curr = newList.first;
+		while(curr != null) {
+			addBehindLast(curr.info);
+			curr = curr.next;
+		}
 	}
 	
 	private boolean isIndexOutOfRange(int index) {
