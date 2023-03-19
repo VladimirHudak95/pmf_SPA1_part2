@@ -21,14 +21,59 @@ public class SortedList {
 		}
 	}
 	
+	public int size() {
+		return size;
+	}
+	
+	public boolean isEmpty() {
+		return size == 0;
+	}
+	
 	public void add(int info) {
+		Node n = new Node(info);
 		if (first == null) {
-			Node n = new Node(info);
 			first = n;
 			size++;
-		} else if (info < first.info) {
-			
+		} else if (info <= first.info) {
+			n.next = first;
+			first = n;
+			size++;
+		} else {
+			Node curr = first;
+			while (curr.next != null && curr.next.info <= info) {
+				curr = curr.next;
+			}
+			n.next = curr.next;
+			curr.next = n;
+			size++;
 		}
+		
 	}
+	
+	public void printSortedList() {
+		if (first == null) {
+			System.out.println("Empty list!");
+			return;
+		}
+		System.out.print("List: [");
+		Node curr = first;
+		while (curr.next != null) {
+			System.out.print(" " + curr.info + ", ");
+			curr = curr.next;
+		}
+		System.out.print(curr.info + " ]");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
