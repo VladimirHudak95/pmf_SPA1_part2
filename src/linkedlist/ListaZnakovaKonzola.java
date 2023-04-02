@@ -6,7 +6,7 @@ public class ListaZnakovaKonzola {
 		
 		ListaZnakova lista = new ListaZnakova();
 		
-		lista.add('8');
+		lista.add('A');
 		lista.add('3');
 		lista.add('g');
 		lista.add('Q');

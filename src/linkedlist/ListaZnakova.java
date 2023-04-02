@@ -128,7 +128,9 @@ public class ListaZnakova {
 			}
 				
 		}
-		
+		if(newListCurr != null) {
+			newListCurr.next = null;
+		}
 		return newList;
 	}
 	
