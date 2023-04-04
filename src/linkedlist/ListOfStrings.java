@@ -80,4 +80,47 @@ public class ListOfStrings {
 		return count;
 	}
 	
+	public int numberOfElementsBeginningWithCapitalLetter() {
+		Node curr = first;
+		int count = 0;
+		while(curr != null) {
+			if(Character.isUpperCase(curr.info.charAt(0))) {
+				count++;
+			}
+			curr = curr.next;
+		}
+		return count;
+	}
+	
+	public double averageLengthOfElements() {
+		int numberOfElements = 0;
+		int elementLength = 0;
+		Node curr = first;
+		while(curr != null) {
+			elementLength += curr.info.length();
+			numberOfElements++;
+			curr = curr.next;
+		}
+		return elementLength / numberOfElements;
+	}
+	
+	public void removeElementsShorterThanPrevious() {
+		
+		if(first == null || first.next == null) {
+			return;
+		}
+		
+		Node prev = first;
+		Node curr = first.next;
+		while(curr != null) {
+			if(curr.info.length() > prev.info.length()) {
+				prev.next = curr.next;
+				curr = curr.next;
+				size--;
+			} else {
+				prev = curr;
+				curr = curr.next;
+			}
+		}
+	}
 }
